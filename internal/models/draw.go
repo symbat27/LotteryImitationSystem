@@ -1,7 +1,7 @@
 package models
 
 type Draw struct {
-	ID             int
-	WinningNumbers []int
-	Status         string
+	ID             string `json:"id"`
+	WinningNumbers []int  `json:"winning_numbers"`
+	Status         string `json:"status"`
 }
