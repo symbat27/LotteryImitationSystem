@@ -1,7 +1,11 @@
+user.go
+
 package models
 
+import "time"
+
 type User struct {
-	ID       int
-	Username string
-	Balance  float64
+  ID        string    json:"id"
+  Username  string    json:"username"
+  CreatedAt time.Time json:"created_at"
 }
