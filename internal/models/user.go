@@ -1,4 +1,3 @@
-user.go
 
 package models
 
