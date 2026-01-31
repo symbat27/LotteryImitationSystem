@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel – Lottery System</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #333; }
+        button { padding: 8px 14px; margin: 5px 0; }
+        table { border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px 12px; }
+        th { background: #f4f4f4; }
+        .money { color: green; }
+        .travel { color: blue; }
+        .gift { color: purple; }
+    </style>
+</head>
+<body>
+
+<h1>🎛 Admin Panel</h1>
+
+<button onclick="loadStats()">Load Prize Statistics</button>
+
+<h2>Statistics</h2>
+<pre id="stats"></pre>
+
+<h2>Prizes History</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Ticket ID</th>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Value</th>
+    </tr>
+    </thead>
+    <tbody id="prizes"></tbody>
+</table>
+
+<script>
+    function loadStats() {
+        fetch('/admin/stats')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('stats').innerText =
+                    JSON.stringify(data, null, 2);
+            });
+    }
+
+    function loadPrizes() {
+        fetch('/admin/prizes')
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.getElementById('prizes');
+                tbody.innerHTML = '';
+                data.forEach(p => {
+                    const row = `
+          <tr>
+            <td>${p.ticket_id}</td>
+            <td class="${p.type}">${p.type}</td>
+            <td>${p.name}</td>
+            <td>${p.value}</td>
+          </tr>`;
+                    tbody.innerHTML += row;
+                });
+            });
+    }
+
+    loadPrizes();
+</script>
+
+</body>
+</html>
