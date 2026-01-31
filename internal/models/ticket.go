@@ -1,4 +1,3 @@
-ticket.go
 
 package models
 
